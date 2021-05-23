@@ -1,15 +1,35 @@
-import Link from 'next/link'
-import Layout from '../components/Layout'
+import { FormEvent, useState } from "react";
+import axios from "axios";
+import Layout from "../components/Layout";
 
-const IndexPage = () => (
-  <Layout title="Home | Next.js + TypeScript Example">
-    <h1>Hello Next.js 👋</h1>
-    <p>
-      <Link href="/about">
-        <a>About</a>
-      </Link>
-    </p>
-  </Layout>
-)
+const IndexPage = () => {
+  const [image, setImage] = useState("");
+  const [saveData, setSaveData] = useState("");
 
-export default IndexPage
+  async function onSubmit(e: FormEvent) {
+    e.preventDefault();
+    const data = await axios.post("/api/image", {
+      data: saveData,
+    });
+
+    setImage(data.data);
+  }
+
+  return (
+    <Layout title="Home | Next.js + TypeScript Example">
+      <form action="" onSubmit={onSubmit}>
+        <textarea
+          name="data"
+          id=""
+          onChange={(e) => setSaveData(e.target.value)}
+          cols={30}
+          rows={10}
+        ></textarea>
+        <button type="submit">Submit</button>
+      </form>
+      <img src={image} alt="" />
+    </Layout>
+  );
+};
+
+export default IndexPage;
