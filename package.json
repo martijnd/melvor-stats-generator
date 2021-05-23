@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "axios": "^0.21.1",
-    "canvas": "^2.8.0",
+    "canvas": "2.6.1",
     "next": "latest",
     "pako": "^2.0.3",
     "react": "^17.0.1",
