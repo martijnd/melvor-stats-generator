@@ -38,7 +38,7 @@ const handler = (req: NextApiRequest, res: NextApiResponse) => {
     const ctx = canvas.getContext('2d');
 
 
-    loadImage(path.join('public', 'template.png')).then((image: any) => {
+    loadImage('https://melvor-stats-generator.vercel.app/template.png').then((image: any) => {
       ctx.drawImage(image, 0, 0, 529, 288)
 
       Object.values(skillLevels).forEach(({level, x, y}) => {
