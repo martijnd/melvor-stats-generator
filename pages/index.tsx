@@ -16,8 +16,8 @@ const IndexPage = () => {
   }
 
   return (
-    <Layout title="Home | Next.js + TypeScript Example">
-      <form action="" onSubmit={onSubmit}>
+    <Layout>
+      <form onSubmit={onSubmit}>
         <textarea
           name="data"
           id=""
