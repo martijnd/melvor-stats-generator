@@ -33,7 +33,6 @@ const handler = (req: NextApiRequest, res: NextApiResponse) => {
       Herblore: { level: skillLevelsJson[19], x: 410, y: 244 },
       Agility: { level: skillLevelsJson[20], x: 490, y: 190 },
     }
-    console.log(skillLevels.Ranged)
 
     const canvas = createCanvas(529, 288);
     const ctx = canvas.getContext('2d');
