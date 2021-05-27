@@ -6,15 +6,21 @@ const IndexPage = () => {
   const [image, setImage] = useState("");
   const [saveData, setSaveData] = useState("");
   const [name, setName] = useState("");
+  const [error, setError] = useState("");
 
   async function onSubmit(e: FormEvent) {
     e.preventDefault();
-    const data = await axios.post("/api/image", {
-      data: saveData,
-      name,
-    });
-
-    setImage(data.data);
+    try {
+      setError('');
+      const data = await axios.post("/api/image", {
+        data: saveData,
+        name,
+      });
+      
+      setImage(data.data);
+    } catch (e) {
+      setError('Something went wrong. Is the save file correct?');
+    }
   }
 
   return (
@@ -32,10 +38,12 @@ const IndexPage = () => {
           cols={30}
           rows={10}
         ></textarea>
+        {error && <div className="text-red-700 font-semibold border bg-red-300 border-red-700 rounded px-4 py-2">{error}</div>}
         <input
           className="bg-[#272727] text-white w-full p-4"
           type="text"
           placeholder="Enter character name (optional)"
+          maxLength={32}
           name="name"
           onChange={(e) => setName(e.target.value)}
           id="name"
@@ -53,7 +61,7 @@ const IndexPage = () => {
           download={`${name}sMelvorIdleCard.png`}
           className="bg-blue-600 mt-4 rounded px-4 py-2 text-white font-semibold block hover:shadow w-full md:w-4/5 mx-auto text-center"
         >
-          Download Melvor Idle Card
+          Download
         </a>}
     </Layout>
   );
