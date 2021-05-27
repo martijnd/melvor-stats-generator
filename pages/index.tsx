@@ -20,11 +20,11 @@ const IndexPage = () => {
         name,
       });
 
-      NProgress.done();
       setImage(data.data);
     } catch (e) {
       setError("Something went wrong. Is the save file correct?");
     }
+    NProgress.done();
   }
 
   useEffect(() => {
