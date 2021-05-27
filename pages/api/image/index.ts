@@ -34,7 +34,7 @@ const handler = (req: NextApiRequest, res: NextApiResponse) => {
       Agility: { level: skillLevelsJson[20], x: 490, y: 190 },
     }
 
-    registerFont(path.resolve('/public/impact.ttf'), { family: 'Impact' })
+    registerFont(path.join(process.cwd(), 'public', 'impact.ttf'), { family: 'Impact' })
 
     const canvas = createCanvas(529, 288);
     const ctx = canvas.getContext('2d');
