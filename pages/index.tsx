@@ -1,5 +1,6 @@
 import { FormEvent, useEffect, useState } from "react";
 import axios from "axios";
+import NProgress from 'nprogress'
 import Layout from "../components/Layout";
 
 const IndexPage = () => {
@@ -11,13 +12,15 @@ const IndexPage = () => {
   async function onSubmit(e: FormEvent) {
     e.preventDefault();
     localStorage.name = name;
+    NProgress.start()
+    setError("");
     try {
-      setError("");
       const data = await axios.post("/api/image", {
         data: saveData,
         name,
       });
 
+      NProgress.done();
       setImage(data.data);
     } catch (e) {
       setError("Something went wrong. Is the save file correct?");
@@ -39,7 +42,8 @@ const IndexPage = () => {
         <span className="font-bold">To find your save data</span>
         <span className="block">
           Go to Settings &rarr; Account Settings &rarr; Import / Export Save
-          &rarr; Export Save &rarr; Copy and paste the data into the field below.
+          &rarr; Export Save &rarr; Copy and paste the data into the field
+          below.
         </span>
       </p>
       <form onSubmit={onSubmit} className="flex flex-col space-y-2">
@@ -74,15 +78,25 @@ const IndexPage = () => {
           Generate Melvor Idle Card
         </button>
       </form>
-      <img src={image} alt="Melvor Idle Card" className="mx-auto mt-4" />
       {image && (
-        <a
-          href={image}
-          download={name ? `${name}sMelvorIdleCard.png` : 'MelvorIdleCard.png'}
-          className="block w-full px-4 py-2 mx-auto mt-4 font-semibold text-center text-white bg-blue-600 rounded hover:shadow md:w-4/5"
-        >
-          Download as PNG
-        </a>
+        <>
+          <img
+            src={image}
+            width={494}
+            height={217}
+            alt="Melvor Idle Card"
+            className="mx-auto mt-4"
+          />
+          <a
+            href={image}
+            download={
+              name ? `${name}sMelvorIdleCard.png` : "MelvorIdleCard.png"
+            }
+            className="block w-full px-4 py-2 mx-auto mt-4 font-semibold text-center text-white bg-blue-600 rounded hover:shadow md:w-4/5"
+          >
+            Download as PNG
+          </a>
+        </>
       )}
     </Layout>
   );
