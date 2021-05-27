@@ -74,11 +74,11 @@ const IndexPage = () => {
           Generate Melvor Idle Card
         </button>
       </form>
-      <img src={image} alt="" className="mx-auto mt-4" />
+      <img src={image} alt="Melvor Idle Card" className="mx-auto mt-4" />
       {image && (
         <a
           href={image}
-          download={`${name}sMelvorIdleCard.png`}
+          download={name ? `${name}sMelvorIdleCard.png` : 'MelvorIdleCard.png'}
           className="block w-full px-4 py-2 mx-auto mt-4 font-semibold text-center text-white bg-blue-600 rounded hover:shadow md:w-4/5"
         >
           Download as PNG
