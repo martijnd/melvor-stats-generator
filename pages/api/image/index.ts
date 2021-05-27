@@ -34,7 +34,7 @@ const handler = (req: NextApiRequest, res: NextApiResponse) => {
       Agility: { level: skillLevelsJson[20], x: 490, y: 190 },
     }
 
-    registerFont(path.join(process.cwd(), 'public', 'impact.ttf'), { family: 'Impact' })
+    registerFont(path.join(process.cwd(), 'public', 'roboto.ttf'), { family: 'Roboto' })
 
     const canvas = createCanvas(529, 288);
     const ctx = canvas.getContext('2d');
@@ -44,7 +44,7 @@ const handler = (req: NextApiRequest, res: NextApiResponse) => {
       ctx.drawImage(image, 0, 0, 529, 288)
 
       Object.values(skillLevels).forEach(({level, x, y}) => {
-        ctx.font = '20px Impact'
+        ctx.font = '20px Roboto'
         ctx.fillStyle = 'white';
         ctx.fillText(level, x, y)
       })
