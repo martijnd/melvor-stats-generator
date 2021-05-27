@@ -1,6 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import pako from 'pako';
-const { createCanvas, loadImage } = require('canvas')
+import path from 'path';
+const { createCanvas, loadImage, registerFont } = require('canvas')
 
 const handler = (req: NextApiRequest, res: NextApiResponse) => {
   const data = req.body.data;
@@ -33,7 +34,7 @@ const handler = (req: NextApiRequest, res: NextApiResponse) => {
       Agility: { level: skillLevelsJson[20], x: 490, y: 190 },
     }
 
-    // registerFont(path.resolve('/.impact.ttf'), { family: 'Impact' })
+    registerFont(path.resolve('/public/impact.ttf'), { family: 'Impact' })
 
     const canvas = createCanvas(529, 288);
     const ctx = canvas.getContext('2d');
@@ -43,7 +44,7 @@ const handler = (req: NextApiRequest, res: NextApiResponse) => {
       ctx.drawImage(image, 0, 0, 529, 288)
 
       Object.values(skillLevels).forEach(({level, x, y}) => {
-        ctx.font = '20px Arial'
+        ctx.font = '20px Impact'
         ctx.fillStyle = 'white';
         ctx.fillText(level, x, y)
       })
