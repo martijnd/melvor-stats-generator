@@ -1,5 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import pako from 'pako';
+import path from 'path';
 const { createCanvas, loadImage, registerFont } = require('canvas')
 
 const handler = (req: NextApiRequest, res: NextApiResponse) => {
@@ -33,7 +34,7 @@ const handler = (req: NextApiRequest, res: NextApiResponse) => {
       Agility: { level: skillLevelsJson[20], x: 490, y: 190 },
     }
 
-    registerFont('https://melvor-stats-generator.vercel.app/impact.ttf', { family: 'Impact' })
+    // registerFont(path.resolve('/.impact.ttf'), { family: 'Impact' })
 
     const canvas = createCanvas(529, 288);
     const ctx = canvas.getContext('2d');
@@ -43,7 +44,7 @@ const handler = (req: NextApiRequest, res: NextApiResponse) => {
       ctx.drawImage(image, 0, 0, 529, 288)
 
       Object.values(skillLevels).forEach(({level, x, y}) => {
-        ctx.font = '20px Impact'
+        ctx.font = '20px Roboto'
         ctx.fillStyle = 'white';
         ctx.fillText(level, x, y)
       })
