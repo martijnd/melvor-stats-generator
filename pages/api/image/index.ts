@@ -43,7 +43,7 @@ const handler = (req: NextApiRequest, res: NextApiResponse) => {
       ctx.drawImage(image, 0, 0, 529, 288)
 
       Object.values(skillLevels).forEach(({level, x, y}) => {
-        ctx.font = '20px Roboto'
+        ctx.font = '20px Arial'
         ctx.fillStyle = 'white';
         ctx.fillText(level, x, y)
       })
