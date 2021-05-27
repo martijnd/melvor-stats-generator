@@ -5,11 +5,13 @@ import Layout from "../components/Layout";
 const IndexPage = () => {
   const [image, setImage] = useState("");
   const [saveData, setSaveData] = useState("");
+  const [name, setName] = useState("");
 
   async function onSubmit(e: FormEvent) {
     e.preventDefault();
     const data = await axios.post("/api/image", {
       data: saveData,
+      name,
     });
 
     setImage(data.data);
@@ -17,10 +19,12 @@ const IndexPage = () => {
 
   return (
     <Layout>
-      <h1 className="text-white font-bold mx-auto my-4 text-2xl text-center">Melvor Idle Statistics card generator</h1>
-      <form onSubmit={onSubmit}>
+      <h1 className="text-white font-bold mx-auto my-4 text-2xl text-center">
+        Melvor Idle Card Generator
+      </h1>
+      <form onSubmit={onSubmit} className="flex flex-col space-y-2">
         <textarea
-        className="bg-[#272727] text-white w-full p-4"
+          className="bg-[#272727] text-[#eee] w-full p-4"
           name="data"
           placeholder="Enter save here..."
           id=""
@@ -28,7 +32,20 @@ const IndexPage = () => {
           cols={30}
           rows={10}
         ></textarea>
-        <button type="submit" className="bg-[#272727] rounded px-4 py-2 text-white font-semibold block hover:shadow w-full">Submit</button>
+        <input
+          className="bg-[#272727] text-white w-full p-4"
+          type="text"
+          placeholder="Enter character name (optional)"
+          name="name"
+          onChange={(e) => setName(e.target.value)}
+          id="name"
+        />
+        <button
+          type="submit"
+          className="bg-[#272727] rounded px-4 py-2 text-white font-semibold block hover:shadow w-full"
+        >
+          Generate Melvor Idle Card
+        </button>
       </form>
       <img src={image} alt="" className="mx-auto mt-4" />
     </Layout>

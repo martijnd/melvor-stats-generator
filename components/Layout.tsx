@@ -9,7 +9,7 @@ type Props = {
 const Layout = ({ children }: Props) => (
   <div className="min-h-screen bg-[#121212]">
     <Head>
-      <title>Melvor Idle Statistics Image generator</title>
+      <title>Melvor Idle Image generator</title>
       <meta charSet="utf-8" />
       <meta name="viewport" content="initial-scale=1.0, width=device-width" />
     </Head>
