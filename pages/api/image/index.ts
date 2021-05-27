@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import pako from 'pako';
 import path from 'path';
-const { createCanvas, loadImage, registerFont } = require('canvas')
+import { createCanvas, loadImage, registerFont } from 'canvas';
 
 const handler = (req: NextApiRequest, res: NextApiResponse) => {
   const { name, data } = req.body;
@@ -49,7 +49,7 @@ const handler = (req: NextApiRequest, res: NextApiResponse) => {
     const ctx = canvas.getContext('2d');
 
 
-    loadImage(path.join(process.cwd(), 'public', 'templatev3.png')).then((image: any) => {
+    loadImage(path.join(process.cwd(), 'public', 'template.png')).then((image: any) => {
       ctx.drawImage(image, 0, 0, 494, 217)
 
       Object.values(skillLevels).forEach(({ level, x, y }) => {
@@ -67,7 +67,7 @@ const handler = (req: NextApiRequest, res: NextApiResponse) => {
       // Total level
       ctx.font = '16px Roboto'
       ctx.fillStyle = 'white';
-      ctx.fillText(totalLevel, 60, 120)
+      ctx.fillText(totalLevel.toString(), 60, 120)
 
       res.status(200).json(canvas.toDataURL())
     })

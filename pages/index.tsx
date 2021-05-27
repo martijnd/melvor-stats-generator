@@ -48,6 +48,13 @@ const IndexPage = () => {
         </button>
       </form>
       <img src={image} alt="" className="mx-auto mt-4" />
+      {image && <a
+          href={image}
+          download={`${name}sMelvorIdleCard.png`}
+          className="bg-blue-600 mt-4 rounded px-4 py-2 text-white font-semibold block hover:shadow w-full md:w-4/5 mx-auto text-center"
+        >
+          Download Melvor Idle Card
+        </a>}
     </Layout>
   );
 };
