@@ -39,7 +39,7 @@ const IndexPage = () => {
         <span className="font-bold">To find your save data</span>
         <span className="block">
           Go to Settings &rarr; Account Settings &rarr; Import / Export Save
-          &rarr; Export Save &rarr; Copy and paste the data in the field below.
+          &rarr; Export Save &rarr; Copy and paste the data into the field below.
         </span>
       </p>
       <form onSubmit={onSubmit} className="flex flex-col space-y-2">
