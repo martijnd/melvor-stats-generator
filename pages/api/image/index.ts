@@ -1,7 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import pako from 'pako';
-import path from 'path';
-const { createCanvas, loadImage, registerFont } = require('canvas')
+const { createCanvas, loadImage } = require('canvas')
 
 const handler = (req: NextApiRequest, res: NextApiResponse) => {
   const data = req.body.data;
