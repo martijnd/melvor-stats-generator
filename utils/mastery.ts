@@ -12,6 +12,7 @@ function calculateMonsters() {
 function calculatePets() {
     const total = save.petUnlocked.length - 3;
     const unlocked = save.petUnlocked.filter(Boolean).length
+    
     return Math.floor(unlocked / total * 100);
 }
 
@@ -40,26 +41,22 @@ function calculateSkills() {
 
 function calculateMastery() {
     const masteryArray = Object.values(save.MASTERY);
-    const totalLevel = masteryArray.map(skill => skill.xp.length * 99).reduce((a, b) => a + b);
-    const totalPerSkill = masteryArray.map(skill => skill.xp.reduce((acc, xp) => acc + Math.min(99, xp_to_level(xp)), 0)).reduce((a, b) => a + b);
+    const totalLevel = masteryArray.reduce((acc, skill) => acc + skill.xp.length * 99, 0);
+    const totalPerSkill = masteryArray.reduce((acc, skill) => acc + skill.xp.reduce((acc, xp) => acc + Math.min(99, xpToLevel(xp)), 0), 0);
 
     return Math.floor(totalPerSkill / totalLevel * 100);
 }
 
-function equate(xp: number) {
-    return Math.floor(xp + 300 * Math.pow(2, xp / 7));
-}
+function levelToXp(level: number) {
+    const xp = Array(level).fill(null).reduce((total, _, i) => total + Math.floor(i + 300 * Math.pow(2, i / 7)), 0);
 
-function level_to_xp(level: number) {
-    var xp = 0;
-    for (var i = 1; i < level; i++) xp += equate(i);
     return Math.floor(xp / 4);
 }
 
-function xp_to_level(xp: number) {
-    var level = 1;
+function xpToLevel(xp: number) {
+    let level = 1;
 
-    while (level_to_xp(level + 1) < xp + 1)
+    while (levelToXp(level + 1) < xp + 1)
         level++;
 
     return level;
