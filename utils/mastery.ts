@@ -13,7 +13,7 @@ function calculatePets(save: ISave) {
     const total = save.petUnlocked.length - 3;
     const unlocked = save.petUnlocked.filter(Boolean).length
     
-    return Math.floor(unlocked / total * 100);
+    return Math.min(100, Math.floor(unlocked / total * 100));
 }
 
 function calculateItems(save: ISave) {
