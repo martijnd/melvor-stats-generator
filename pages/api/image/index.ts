@@ -63,7 +63,7 @@ const handler = (req: NextApiRequest, res: NextApiResponse) => {
       ctx.font = '24px Kingthings'
       ctx.fillStyle = 'yellow';
       ctx.textAlign = 'center';
-      ctx.fillText(name ? `${name}'s Stats` : 'Melvor Idle Stats', 245, 47)
+      ctx.fillText(name ? name : 'Melvor Idle Stats', 245, 47)
       
       // Total level
       ctx.textAlign = 'left';
