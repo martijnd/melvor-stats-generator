@@ -39,19 +39,10 @@ export function calculateSkills() {
 
 export function calculateMastery() {
     const masteryArray = Object.values(save.MASTERY);
-    return xp_to_level(12905720)
+    const totalLevel = masteryArray.map(skill => skill.xp.length * 99).reduce((a, b) => a + b);
+    const totalPerSkill = masteryArray.map(skill => skill.xp.reduce((acc, xp) => acc + Math.min(99, xp_to_level(xp)), 0)).reduce((a, b) => a + b);
 
-    // const percentagePerSkill = masteryArray.map(skill => {
-    //     const totalLevels = skill.xp.length * 99;
-    //     console.log('New skill');
-
-    //     return Math.floor(((skill.xp.reduce((acc, xp) => {
-    //         console.log(Math.min(99, xp_to_level(xp)))
-    //         return acc + Math.min(99, xp_to_level(xp));
-    //     }, 0)) / totalLevels) * 100);
-    // });
-
-    // return percentagePerSkill.reduce((a, b) => a + b) / masteryArray.length;
+    return Math.floor(totalPerSkill / totalLevel * 100);
 }
 
 function equate(xp: number) {
@@ -64,7 +55,11 @@ function level_to_xp(level: number) {
     return Math.floor(xp / 4);
 }
 
-function xp_to_level(xp: number, level = 1) {
-    while (level_to_xp(level) < xp) level++;
+function xp_to_level(xp: number) {
+    var level = 1;
+
+    while (level_to_xp(level + 1) < xp + 1)
+        level++;
+
     return level;
-}
+};

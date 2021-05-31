@@ -16,7 +16,7 @@ function RSExp(){
     this.xp_to_level = function(xp){
         var level = 1;
  
-        while (this.level_to_xp(level) < xp)
+        while (this.level_to_xp(level + 1) < xp + 1)
             level++;
  
         return level;
@@ -26,3 +26,10 @@ function RSExp(){
 var rs = new RSExp();
 
 console.log(rs.xp_to_level(12905720));
+console.log(rs.xp_to_level(0));
+console.log(rs.xp_to_level(6500000));
+console.log(rs.xp_to_level(2108));
+console.log(rs.xp_to_level(83));
+console.log(rs.xp_to_level(82));
+console.log(rs.xp_to_level(184040));
+console.log(rs.xp_to_level(13034430));

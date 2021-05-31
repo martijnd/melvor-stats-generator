@@ -2,10 +2,14 @@ import { NextApiRequest, NextApiResponse } from 'next'
 import pako from 'pako';
 import path from 'path';
 import { createCanvas, loadImage, registerFont } from 'canvas';
-import { calculateMastery } from '../../../utils/mastery';
+import { calculateItems, calculateMastery, calculateMonsters, calculatePets, calculateSkills } from '../../../utils/mastery';
 
 const handler = (req: NextApiRequest, res: NextApiResponse) => {
+  console.log(calculateSkills());
   console.log(calculateMastery());
+  console.log(calculateItems());
+  console.log(calculateMonsters());
+  console.log(calculatePets());
   res.status(200).json('test');
   // const { name, data } = req.body;
   try {
