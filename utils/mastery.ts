@@ -18,6 +18,7 @@ function calculatePets() {
 function calculateItems() {
     let itemsFound = 0;
     let itemsToIgnore = 0;
+    
     for (let i = 0; i < save.itemStats.length; i++) {
         if (save.itemStats[i].stats[0] > 0 && !totalItems[i].ignoreCompletion) {
             itemsFound++;
