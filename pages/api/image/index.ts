@@ -74,7 +74,7 @@ const handler = (req: NextApiRequest, res: NextApiResponse) => {
       // Mastery progress
       const {
         skills, mastery, items, monsters, pets, total
-      } = getMasteryProgress();
+      } = getMasteryProgress(jsonSave);
 
       const data = [
         { data: skills, y: 59 },
