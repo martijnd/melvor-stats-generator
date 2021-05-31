@@ -87,13 +87,13 @@ const handler = (req: NextApiRequest, res: NextApiResponse) => {
       ctx.font = '12px Roboto'
       ctx.fillStyle = 'white';
       data.forEach(({ data, y }) => {
-        ctx.fillText(`${data.toString()}%`, 74, y)
+        ctx.fillText(`${data.toString()}%`, 78, y)
       })
 
       // Mastery total
       ctx.font = '16px Roboto'
       ctx.fillStyle = 'white';
-      ctx.fillText(`${total.toString()}%`, 80, 162)
+      ctx.fillText(`${total.toString()}%`, 84, 162)
 
       res.status(200).json(canvas.toDataURL())
     })
