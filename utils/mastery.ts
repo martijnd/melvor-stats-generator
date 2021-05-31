@@ -2,20 +2,20 @@ import save from '../save.json';
 import { SKILLS } from './data';
 import totalItems from './items';
 
-export function calculateMonsters() {
+function calculateMonsters() {
     const total = save.monsterStats.length - 2;
     const slain = save.monsterStats.reduce((total, stat) => stat.stats[2] > 0 ? total + 1 : total, 0);
 
     return Math.floor(slain / total * 100);
 }
 
-export function calculatePets() {
+function calculatePets() {
     const total = save.petUnlocked.length - 3;
     const unlocked = save.petUnlocked.filter(Boolean).length
     return Math.floor(unlocked / total * 100);
 }
 
-export function calculateItems() {
+function calculateItems() {
     let itemsFound = 0;
     let itemsToIgnore = 0;
     for (let i = 0; i < save.itemStats.length; i++) {
@@ -30,14 +30,14 @@ export function calculateItems() {
     return Math.floor(itemsFound / (totalItems.length - itemsToIgnore) * 100);
 }
 
-export function calculateSkills() {
+function calculateSkills() {
     const totalLevel = Object.keys(SKILLS).length * 99;
     const skillsTotal = save.skillLevel.reduce((acc, level) => acc + level, 0);
 
     return Math.floor(skillsTotal / totalLevel * 100);
 }
 
-export function calculateMastery() {
+function calculateMastery() {
     const masteryArray = Object.values(save.MASTERY);
     const totalLevel = masteryArray.map(skill => skill.xp.length * 99).reduce((a, b) => a + b);
     const totalPerSkill = masteryArray.map(skill => skill.xp.reduce((acc, xp) => acc + Math.min(99, xp_to_level(xp)), 0)).reduce((a, b) => a + b);
@@ -63,3 +63,22 @@ function xp_to_level(xp: number) {
 
     return level;
 };
+
+export default function () {
+    const skills = calculateSkills();
+    const mastery = calculateMastery();
+    const items = calculateItems();
+    const monsters = calculateMonsters();
+    const pets = calculatePets();
+
+    const total = Math.floor((skills + mastery + items + monsters + pets) / 5);
+
+    return {
+        skills,
+        mastery,
+        items,
+        monsters,
+        pets,
+        total
+    }
+}
