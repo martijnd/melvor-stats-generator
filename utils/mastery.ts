@@ -6,7 +6,7 @@ function calculateMonsters(save: ISave) {
     const total = save.monsterStats.length - 2;
     const slain = save.monsterStats.reduce((total, stat) => stat.stats[2] > 0 ? total + 1 : total, 0);
 
-    return Math.floor(slain / total * 100);
+    return Math.min(100, Math.floor(slain / total * 100));
 }
 
 function calculatePets(save: ISave) {
