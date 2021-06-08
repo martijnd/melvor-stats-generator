@@ -4,8 +4,6 @@ import totalItems from './items';
 import totalMonsters from './monsters';
 
 function calculateMonsters(save: ISave) {
-    // const total = save.monsterStats.length - 2;
-    // const slain = save.monsterStats.reduce((total, stat, index) => stat.stats[2] > 0 && !totalMonsters[index].ignoreCompletion ? total + 1 : total, 0);
     let slain = 0;
     let monstersTotal = totalMonsters.length;
     for (let i = 0; i < save.monsterStats.length; i++) {
