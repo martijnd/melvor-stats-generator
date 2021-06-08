@@ -1,12 +1,21 @@
 import { SKILLS, findLevelByXp } from './data';
 import { ISave } from './ISave';
 import totalItems from './items';
+import totalMonsters from './monsters';
 
 function calculateMonsters(save: ISave) {
-    const total = save.monsterStats.length - 2;
-    const slain = save.monsterStats.reduce((total, stat) => stat.stats[2] > 0 ? total + 1 : total, 0);
+    // const total = save.monsterStats.length - 2;
+    // const slain = save.monsterStats.reduce((total, stat, index) => stat.stats[2] > 0 && !totalMonsters[index].ignoreCompletion ? total + 1 : total, 0);
+    let slain = 0;
+    let monstersTotal = totalMonsters.length;
+    for (let i = 0; i < save.monsterStats.length; i++) {
+    if (save.monsterStats[i].stats[2] > 0 && !totalMonsters[i].ignoreCompletion)
+            slain++;
+        if (totalMonsters[i].ignoreCompletion)
+            monstersTotal -= 1;
+    }
 
-    return Math.min(100, Math.floor(slain / total * 100));
+    return Math.min(100, Math.floor(slain / monstersTotal * 100));
 }
 
 function calculatePets(save: ISave) {
@@ -31,6 +40,8 @@ function calculateItems(save: ISave) {
 
     return Math.floor(itemsFound / (totalItems.length - itemsToIgnore) * 100);
 }
+
+
 
 function calculateSkills(save: ISave) {
     const totalLevel = Object.keys(SKILLS).length * 99;
